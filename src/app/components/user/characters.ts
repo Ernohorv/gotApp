@@ -1,4 +1,5 @@
 export interface Characters {
+  url: string;
   name: string;
   gender: string;
   culture: string;

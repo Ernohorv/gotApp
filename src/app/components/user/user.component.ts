@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-import { DataService} from '../../services/data.service';
+import { CharactersService} from '../../services/characters.service';
 import {Characters} from './characters';
 import {Observable} from 'rxjs/Observable';
 
@@ -10,51 +10,41 @@ import {Observable} from 'rxjs/Observable';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  name: string;
-  address: {
-    street: string,
-    city: string,
-    zip: string
-  };
-  hobbies: string[];
+
   characters: Observable<Characters[]>;
   character: Characters[];
+  char: Characters;
+  ss: string[];
 
-  constructor(private http: HttpClient, private dataService: DataService) {
+  constructor(private http: HttpClient,
+              private characterService: CharactersService) {
     console.log('constructor run');
   }
 
   ngOnInit() {
     console.log('ngOnInit run');
-    this.name = 'John Doe';
-    this.address = {
-      street: '50 Main Street',
-      city: 'Boston',
-      zip: 'MA'
-    };
-    this.hobbies = ['1', '2', '3'];
 
     this.getCharacters();
-    this.getCharacter();
+    this.getAllCharacters();
+    this.getCh();
   }
 
   getCharacters() {
-    this.characters = this.dataService.getPost();
+    this.characters = this.characterService.getPostt();
   }
 
-  getCharacter() {
-    this.dataService.getPostt().subscribe(
-      data => this.character = data
+  getAllCharacters() {
+    /*for(let i = 100; i < 120; ++i) {
+      this.characterService.getAllCharactersName(i).subscribe(
+        data => this.ss.push(JSON.stringify(data.name))
+      );
+      //this.character.push(this.char);
+    }*/
+    this.characterService.getAllCharactersName(200).subscribe(
+      data => this.char = data
     );
   }
-
-  onClick() {
-    this.name = 'Other name';
+  getCh() {
+    this.character.push(this.char);
   }
-  addHobby(hobby) {
-    console.log(hobby);
-    this.hobbies.push(hobby);
-    return false;
-  }
-
 }

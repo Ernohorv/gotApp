@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './components/user/user.component';
-import { DataService} from './services/data.service';
+import { CharactersService} from './services/characters.service';
 import { CharactersComponent } from './components/characters/characters.component';
 
 @NgModule({
@@ -17,7 +17,7 @@ import { CharactersComponent } from './components/characters/characters.componen
     BrowserModule,
     HttpClientModule
   ],
-  providers: [DataService],
+  providers: [CharactersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
